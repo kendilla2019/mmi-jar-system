@@ -151,3 +151,53 @@ label.f{font-size:12px;font-weight:600;color:var(--muted);display:flex;flex-dire
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--nav-h) + 40px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;font-size:14px;z-index:30;max-width:90vw}
 .loading{padding:40px;text-align:center;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- Responsive: phone is the default above ---------- */
+.brand,.fab-label{display:none}
+.ins-grid{display:flex;flex-direction:column;gap:12px}
+.ins-grid .card+.card{margin-top:0}
+.tx:hover,.jar:hover{background:var(--surface-2)}
+.jar,.tx{transition:background .15s}
+
+/* Tablet: a little more room, 3 jars per row */
+@media (min-width:640px){
+  .app{max-width:720px}
+  .jars{grid-template-columns:repeat(3,1fr)}
+  .ins-grid{display:grid;grid-template-columns:1fr 1fr}
+  .card-wide{grid-column:1/-1}
+  .sheet-bg{align-items:center;padding:24px}
+  .sheet{border-radius:24px;max-height:88vh;max-width:520px}
+  .sticky-save{padding-bottom:16px}
+}
+
+/* Laptop: side menu instead of bottom bar, wider two-column pages */
+@media (min-width:960px){
+  body{padding-left:248px}
+  .app{max-width:1120px;padding-block:36px 48px;padding-left:40px;padding-right:40px}
+  .page-head h1{font-size:34px}
+  .page-head{margin-bottom:24px}
+
+  nav.tabs{top:0;bottom:0;right:auto;width:248px;padding:0;pointer-events:auto}
+  .nav-inner{display:flex;flex-direction:column;align-items:stretch;gap:4px;height:100%;max-width:none;margin:0;border-radius:0;border:none;border-right:1px solid var(--line);background:var(--surface);padding:24px 16px;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:17px;padding:0 8px 18px}
+  .brand img{width:34px;height:34px;border-radius:9px}
+  .fab{order:-1;width:100%;height:48px;margin:0 0 14px;border:none;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:none;font-weight:700;font-size:15px}
+  .brand{order:-2}
+  .fab svg{width:20px;height:20px}
+  .fab-label{display:inline}
+  .tab{flex-direction:row;justify-content:flex-start;gap:12px;font-size:15px;font-weight:500;padding:11px 12px;border-radius:12px}
+  .tab:hover{background:var(--surface-2);color:var(--fg)}
+  .tab.on{background:var(--surface-2)}
+
+  .home-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:32px;align-items:start}
+  .col-side .section-head:first-child{margin-top:0}
+  .col-side{position:sticky;top:36px}
+  .jar-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  #histList,.toolbar,#search,.count{max-width:760px}
+  .toast{bottom:32px;left:calc(50% + 124px)}
+}
+
+@media (min-width:1280px){
+  .jars{grid-template-columns:repeat(3,1fr)}
+  .ins-grid{grid-template-columns:repeat(2,1fr)}
+}

@@ -152,8 +152,9 @@
   function navHtml(v) {
     const tab = (id, label, icon) => `<button class="tab ${v === id ? "on" : ""}" data-go="${id}" aria-current="${v === id}">${icon}${label}</button>`;
     return `<nav class="tabs"><div class="nav-inner">
+      <div class="brand"><img src="icon.svg" alt=""><span>MMI Jar System</span></div>
       ${tab("home", "Home", I.home)}${tab("history", "History", I.hist)}
-      <button class="fab" id="fab" aria-label="Add expense">${I.plus}</button>
+      <button class="fab" id="fab" aria-label="Add expense">${I.plus}<span class="fab-label">Add expense</span></button>
       ${tab("insights", "Insights", I.ins)}${tab("jars", "Jars", I.jars)}
     </div></nav>`;
   }
@@ -211,12 +212,18 @@
         <div><h1>${greet}, ${esc(first)}</h1><p>Every peso has a job today.</p></div>
         <button class="icon-btn avatar" id="settingsBtn" aria-label="Settings">${esc(initials(S.profile.name))}</button>
       </div>
-      ${budgetCard(false)}
-      <div class="section-head"><h2>Your jars</h2><button class="link" data-go="jars">Manage jars</button></div>
-      <div class="jars">${tiles || '<div class="empty" style="grid-column:1/-1">No active jars. Add one in Jars.</div>'}</div>
-      <div class="section-head"><h2>Recent</h2>${recent.length ? '<button class="link" data-go="history">See all</button>' : ""}</div>
-      ${recent.length ? `<div class="list">${recent.map(txRow).join("")}</div>`
-        : '<div class="empty">Nothing logged yet. Tap the + button or a jar to add your first expense.</div>'}`;
+      <div class="home-grid">
+        <div class="col-main">
+          ${budgetCard(false)}
+          <div class="section-head"><h2>Your jars</h2><button class="link" data-go="jars">Manage jars</button></div>
+          <div class="jars">${tiles || '<div class="empty" style="grid-column:1/-1">No active jars. Add one in Jars.</div>'}</div>
+        </div>
+        <div class="col-side">
+          <div class="section-head"><h2>Recent</h2>${recent.length ? '<button class="link" data-go="history">See all</button>' : ""}</div>
+          ${recent.length ? `<div class="list">${recent.map(txRow).join("")}</div>`
+            : '<div class="empty">Nothing logged yet. Tap the + button or a jar to add your first expense.</div>'}
+        </div>
+      </div>`;
   }
 
   const sortTx = (a, b) => (b.date || "").localeCompare(a.date || "") || (b.created_at || "").localeCompare(a.created_at || "");
@@ -287,7 +294,8 @@
         <b style="font-family:var(--display);font-size:17px">${monthLabel(mk)}</b>
         <button class="icon-btn" data-im="1" aria-label="Next month" ${isNow ? "disabled style='opacity:.35'" : ""}>›</button>
       </div>
-      <div class="card">
+      <div class="ins-grid">
+      <div class="card card-wide">
         <h3>Total spent</h3><p class="hint">${st.txs.length} transaction${st.txs.length === 1 ? "" : "s"} this month</p>
         <div class="big num" style="font-size:34px;margin:0">${peso(st.spent)}</div>
         <p class="num ${over ? "over-txt" : ""}" style="margin:4px 0 0;font-size:14px">${Math.round(pctUsed)}% of ${peso(st.budget)} budget${over ? " · over by " + peso(st.spent - st.budget) : ""}</p>
@@ -300,7 +308,8 @@
       <div class="card"><h3>By jar</h3><p class="hint">How much of each jar's share you've used</p>
         ${st.txs.length ? jarRows : '<p class="hint" style="margin:0">No spending this month.</p>'}</div>
       <div class="card"><h3>By category</h3><p class="hint">What you spent on</p>
-        ${catRows || '<p class="hint" style="margin:0">No spending this month.</p>'}</div>`;
+        ${catRows || '<p class="hint" style="margin:0">No spending this month.</p>'}</div>
+      </div>`;
   }
 
   function viewJars() {
