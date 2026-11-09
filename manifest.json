@@ -2,11 +2,11 @@
   "name": "MMI Jar System",
   "short_name": "MMI Jars",
   "description": "Split every peso into jars and track where it goes.",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#0b1020",
   "theme_color": "#0b1020",
   "icons": [
-    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
   ]
 }
