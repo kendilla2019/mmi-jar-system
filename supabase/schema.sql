@@ -52,3 +52,6 @@ create policy "own jars" on public.jars
 drop policy if exists "own transactions" on public.transactions;
 create policy "own transactions" on public.transactions
   for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+-- Let signed-in users reach these tables through the API (RLS above still limits them to their own rows).
+grant select, insert, update, delete on public.profiles, public.jars, public.transactions to authenticated;
