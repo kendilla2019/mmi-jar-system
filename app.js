@@ -534,7 +534,7 @@
       <img src="icon.svg" class="logo" alt="">
       <div><h1>MMI Jar System</h1><p>Give every peso a job.</p></div>
       <form id="af" novalidate>
-        <label class="f">Email<input id="ae" type="email" autocomplete="email" required></label>
+        <label class="f">Username<input id="ae" type="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required></label>
         <label class="f">Password<input id="ap" type="password" autocomplete="${mode === "in" ? "current-password" : "new-password"}" minlength="6" required></label>
         <p class="err" id="err">${esc(msg)}</p>
         <button class="btn block" type="submit">${mode === "in" ? "Sign in" : "Create account"}</button>
@@ -543,14 +543,24 @@
     $("#swap").onclick = () => renderAuth(mode === "in" ? "up" : "in");
     $("#af").onsubmit = async (e) => {
       e.preventDefault();
-      const email = $("#ae").value.trim(), password = $("#ap").value;
-      if (!email || password.length < 6) { $("#err").textContent = "Enter your email and a password of at least 6 characters."; return; }
+      // Usernames are stored as an internal login address; no email is ever sent to it.
+      const raw = $("#ae").value.trim().toLowerCase(), password = $("#ap").value;
+      if (!raw.includes("@") && !/^[a-z0-9._-]{3,30}$/.test(raw)) { $("#err").textContent = "Username: 3 to 30 letters or numbers, no spaces."; return; }
+      if (password.length < 6) { $("#err").textContent = "Password needs at least 6 characters."; return; }
+      const email = raw.includes("@") ? raw : raw + "@kendilla2019.github.io";
       $("#err").textContent = "";
       const btn = e.submitter || $("#af button[type=submit]"); btn.disabled = true;
-      const r = mode === "in" ? await sb.auth.signInWithPassword({ email, password }) : await sb.auth.signUp({ email, password, options: { emailRedirectTo: location.origin + location.pathname } });
+      const r = mode === "in" ? await sb.auth.signInWithPassword({ email, password }) : await sb.auth.signUp({ email, password });
       btn.disabled = false;
-      if (r.error) { $("#err").textContent = r.error.message; return; }
-      if (mode === "up" && !r.data.session) return renderAuth("in", "Check your email to confirm your account, then sign in here.");
+      if (r.error) {
+        const m = r.error.message || "";
+        $("#err").textContent = /invalid login/i.test(m) ? "Wrong username or password."
+          : /already registered|already exists/i.test(m) ? "That username is taken. Try another one."
+          : /not confirmed/i.test(m) ? "This account isn't activated yet. Email confirmation must be turned off in Supabase."
+          : m;
+        return;
+      }
+      if (mode === "up" && !r.data.session) return renderAuth("in", "Account made, but email confirmation is still on in Supabase. Turn it off, then sign in.");
       boot();
     };
   }
