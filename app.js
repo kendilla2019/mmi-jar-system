@@ -16,7 +16,7 @@
   ];
   const COLORS = ["#4c7dff", "#a46bff", "#3ecf8e", "#e9a23b", "#ff5fa2", "#ff6b6b", "#36c3e0", "#e9b949", "#9aa6c4"];
   const CATEGORIES = ["Food", "Bills", "Transport", "Shopping", "Health", "Family", "Business", "Fun", "Savings", "Other"];
-  const METHODS = ["Cash", "GCash", "Maya", "Card", "Bank transfer"];
+  const METHODS = ["Cash", "Debit Card", "Credit Card", "Bank Transfer", "E-wallet", "Other"];
   const LOCAL_KEY = "mmi-jar-system-v1";
 
   // ---------- helpers ----------
@@ -396,7 +396,7 @@
           <label class="f">Title<input id="title" placeholder="e.g. Groceries, Globe internet" value="${editing ? esc(tx.title) : ""}" autocomplete="off"></label>
           <div class="grid2">
             <label class="f">Date<input id="date" type="date" value="${editing ? tx.date : todayStr()}"></label>
-            <label class="f">Paid with<select id="method">${opts(METHODS, editing ? tx.method : "Cash")}</select></label>
+            <label class="f">Paid with<select id="method">${opts(editing && tx.method && !METHODS.includes(tx.method) ? [...METHODS, tx.method] : METHODS, editing ? tx.method : "Cash")}</select></label>
           </div>
           <label class="f">Category<select id="cat">${opts(CATEGORIES, editing ? tx.category : "Food")}</select></label>
           <p class="err" id="err"></p>
