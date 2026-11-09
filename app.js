@@ -197,14 +197,14 @@
     const tiles = activeJars().map((j) => {
       const alloc = st.budget * j.pct / 100, spent = st.byJar[j.id] || 0, left = alloc - spent;
       const [label, col] = jarState(alloc, spent);
-      const w = alloc ? Math.max(0, Math.min(100, (left / alloc) * 100)) : 0;
+      const used = alloc ? Math.max(0, Math.min(100, (spent / alloc) * 100)) : (spent ? 100 : 0);
       return `<button class="jar" data-addjar="${j.id}">
         <span class="tag" style="color:${j.color}">${esc(j.short)}</span>
         <h3>${esc(j.name)}</h3>
-        <div class="amt num">${pesoShort(left)}</div>
-        <div class="of num">left of ${pesoShort(alloc)} · ${j.pct}%</div>
-        <div class="mini"><i style="width:${w}%;background:${j.color}"></i></div>
-        <span class="state" style="color:${col}">${label}</span></button>`;
+        <div class="amt num ${left < 0 ? "over-txt" : ""}">${peso(left)}</div>
+        <div class="of num">left of ${peso(alloc)} · ${j.pct}%</div>
+        <div class="mini" role="img" aria-label="${Math.round(used)}% used"><i style="width:${used}%;background:${left < 0 ? "var(--bad)" : j.color}"></i></div>
+        <div class="jar-foot num"><span class="state" style="color:${col}">${label}</span><span class="of">${spent ? peso(spent) + " spent" : "Nothing spent"}</span></div></button>`;
     }).join("");
     const recent = [...S.txs].sort(sortTx).slice(0, 5);
     return `

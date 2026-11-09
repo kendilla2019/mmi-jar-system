@@ -201,3 +201,9 @@ label.f{font-size:12px;font-weight:600;color:var(--muted);display:flex;flex-dire
   .jars{grid-template-columns:repeat(3,1fr)}
   .ins-grid{grid-template-columns:repeat(2,1fr)}
 }
+
+/* Jar bars: explicit sizing so Safari always draws them */
+.mini{display:block;width:100%;min-height:6px;height:6px;flex-shrink:0;position:relative}
+.mini>i{position:absolute;left:0;top:0;bottom:0;height:auto;min-width:0}
+.jar-foot{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.jar .amt{font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
