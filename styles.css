@@ -1,8 +1,8 @@
-/* MMI Jar System: deep green base, green accent, phone-first single column. */
+/* MMI Jar System: deep navy base, blue accent, phone-first single column. */
 :root{
-  --bg:#07130d; --surface:#0e1f17; --surface-2:#153024; --line:#1f3f2f;
-  --fg:#eaf6ef; --muted:#8eae9c; --gold:#34d17f; --gold-ink:#03140b;
-  --blue:#4c7dff; --good:#7fe3a8; --warn:#f5b545; --bad:#ff6b6b;
+  --bg:#0a0f1d; --surface:#121a2e; --surface-2:#1a2440; --line:#25314f;
+  --fg:#eef2fb; --muted:#8b98b5; --gold:#6b9bff; --gold-ink:#0a1120; --btn:#2f63ea; --btn-ink:#ffffff;
+  --blue:#4c7dff; --good:#3ecf8e; --warn:#f5b545; --bad:#ff6b6b;
   --display:"Outfit",system-ui,sans-serif; --body:"DM Sans",system-ui,sans-serif;
   --nav-h:72px;
   color-scheme:dark;
@@ -21,21 +21,21 @@ input,select{background:var(--bg);border:1px solid var(--line);border-radius:12p
 .page-head h1{font-size:28px;font-weight:700;letter-spacing:-.02em}
 .page-head p{margin:4px 0 0;color:var(--muted)}
 .icon-btn{width:42px;height:42px;border-radius:13px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;flex-shrink:0}
-.avatar{background:var(--gold);color:var(--gold-ink);border:none;font-family:var(--display);font-weight:700}
+.avatar{background:#6b9bff;color:#ffffff;border:none;font-family:var(--display);font-weight:700}
 
 /* Budget card */
-.budget{border-radius:24px;padding:20px;background:radial-gradient(120% 100% at 80% 0%,#23a565 0%,#147444 50%,#0b4229 100%);border:1px solid #2c9a62}
-.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#c4ecd5;font-weight:600}
+.budget{border-radius:24px;padding:20px;background:radial-gradient(120% 100% at 70% 30%,#2a5be0 0%,#1c41b0 48%,#132a70 100%);border:1px solid #3a63d6}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#bfcbf3;font-weight:600}
 .row-between{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .pill{font-size:12px;font-weight:600;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.14);white-space:nowrap}
 .pill.over{background:rgba(255,107,107,.25);color:#ffd0d0}
 .big{font-family:var(--display);font-size:42px;font-weight:700;letter-spacing:-.02em;margin-top:8px}
-.sub{color:#d3f1df;font-size:14px}
+.sub{color:#c9d5fa;font-size:14px}
 .bar{height:8px;border-radius:99px;background:rgba(255,255,255,.15);margin-top:14px;overflow:hidden}
-.bar>i{display:block;height:100%;border-radius:99px;background:#c9f7dc;transition:width .4s}
+.bar>i{display:block;height:100%;border-radius:99px;background:#6cc4ff;transition:width .4s}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
 .stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px;min-width:0}
-.stat span{display:block;font-size:11px;color:#c4ecd5;font-weight:600}
+.stat span{display:block;font-size:11px;color:#bfcbf3;font-weight:600}
 .stat b{font-family:var(--display);font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
 .budget.slim .big{font-size:32px}
 
@@ -71,7 +71,7 @@ input,select{background:var(--bg);border:1px solid var(--line);border-radius:12p
 .banner div{flex:1;min-width:0}
 .banner b{display:block;font-size:14px}
 .banner span{font-size:12px;color:var(--muted)}
-.btn{border:none;background:var(--gold);color:var(--gold-ink);font-weight:700;border-radius:12px;padding:12px 16px}
+.btn{border:none;background:var(--btn);color:var(--btn-ink);font-weight:700;border-radius:12px;padding:12px 16px}
 .btn.ghost{background:none;border:1px solid var(--line);color:var(--fg);font-weight:600}
 .btn.small{padding:8px 12px;font-size:13px;border-radius:10px}
 .btn.block{width:100%}
@@ -93,7 +93,7 @@ input,select{background:var(--bg);border:1px solid var(--line);border-radius:12p
 .toolbar{display:flex;gap:8px;margin-bottom:6px}
 .seg{display:inline-grid;grid-auto-flow:column;gap:4px;background:var(--surface);border:1px solid var(--line);padding:4px;border-radius:12px}
 .seg button{border:none;background:none;padding:8px 12px;border-radius:9px;font-weight:600;color:var(--muted);font-size:13px}
-.seg button.on{background:var(--gold);color:var(--gold-ink)}
+.seg button.on{background:var(--btn);color:var(--btn-ink)}
 .count{font-size:13px;color:var(--muted);margin:10px 0 0}
 
 /* Insights */
@@ -112,10 +112,10 @@ input,select{background:var(--bg);border:1px solid var(--line);border-radius:12p
 
 /* Nav */
 nav.tabs{position:fixed;left:0;right:0;bottom:0;padding:0 max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));pointer-events:none;z-index:10}
-.nav-inner{max-width:448px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);align-items:center;background:rgba(14,31,23,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:24px;height:var(--nav-h);pointer-events:auto}
+.nav-inner{max-width:448px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);align-items:center;background:rgba(18,26,46,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:24px;height:var(--nav-h);pointer-events:auto}
 .tab{background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--muted);padding:6px 0}
-.tab.on{color:var(--gold)}
-.fab{justify-self:center;width:58px;height:58px;border-radius:50%;border:4px solid var(--bg);background:var(--gold);color:var(--gold-ink);display:grid;place-items:center;margin-top:-30px;box-shadow:0 8px 24px rgba(52,209,127,.35)}
+.tab.on{color:var(--fg)}
+.fab{justify-self:center;width:58px;height:58px;border-radius:50%;border:4px solid var(--bg);background:var(--btn);color:var(--btn-ink);display:grid;place-items:center;margin-top:-30px;box-shadow:0 8px 24px rgba(37,99,235,.45)}
 
 /* Sheet */
 .sheet-bg{position:fixed;inset:0;background:rgba(3,6,14,.65);z-index:20;display:flex;align-items:flex-end;justify-content:center}
@@ -131,7 +131,7 @@ label.f{font-size:12px;font-weight:600;color:var(--muted);display:flex;flex-dire
 .jar-pick button{border:1px solid var(--line);background:var(--bg);border-radius:14px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;min-width:0}
 .jar-pick button .badge{width:34px;height:34px;font-size:10px}
 .jar-pick button span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-.jar-pick button.on{border-color:var(--gold);background:rgba(52,209,127,.12)}
+.jar-pick button.on{border-color:var(--gold);background:rgba(91,140,255,.14)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .sticky-save{position:sticky;bottom:0;background:var(--surface);padding:12px 0 calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:8px}
 .sticky-save .btn{flex:1}
