@@ -587,4 +587,24 @@
     }
   }
   boot();
+
+  // Pull fresh data when the app comes back on screen, so changes made on
+  // another device (laptop vs phone) show up without a manual refresh.
+  let lastSync = Date.now();
+  async function resync() {
+    if (!CLOUD || !S.profile || document.hidden || document.querySelector(".sheet-bg")) return;
+    if (Date.now() - lastSync < 5000) return;
+    lastSync = Date.now();
+    try {
+      if (!(await Cloud.user())) return renderAuth();
+      const d = await Cloud.load();
+      S.profile = d.profile || S.profile; S.jars = d.jars || []; S.txs = d.txs || [];
+      const active = document.activeElement && document.activeElement.id === "search";
+      render();
+      if (active) { const n = document.getElementById("search"); if (n) { n.focus(); n.setSelectionRange(n.value.length, n.value.length); } }
+    } catch (e) { console.error(e); }
+  }
+  document.addEventListener("visibilitychange", resync);
+  window.addEventListener("focus", resync);
+  setInterval(resync, 60000);
 })();
