@@ -547,7 +547,7 @@
       if (!email || password.length < 6) { $("#err").textContent = "Enter your email and a password of at least 6 characters."; return; }
       $("#err").textContent = "";
       const btn = e.submitter || $("#af button[type=submit]"); btn.disabled = true;
-      const r = mode === "in" ? await sb.auth.signInWithPassword({ email, password }) : await sb.auth.signUp({ email, password });
+      const r = mode === "in" ? await sb.auth.signInWithPassword({ email, password }) : await sb.auth.signUp({ email, password, options: { emailRedirectTo: location.origin + location.pathname } });
       btn.disabled = false;
       if (r.error) { $("#err").textContent = r.error.message; return; }
       if (mode === "up" && !r.data.session) return renderAuth("in", "Check your email to confirm your account, then sign in here.");
